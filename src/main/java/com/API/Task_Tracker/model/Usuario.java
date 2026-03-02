@@ -70,4 +70,32 @@ public class Usuario implements UserDetails {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
 }
