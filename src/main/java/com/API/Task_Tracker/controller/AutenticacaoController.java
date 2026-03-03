@@ -2,7 +2,6 @@ package com.API.Task_Tracker.controller;
 
 import com.API.Task_Tracker.model.Usuario;
 import com.API.Task_Tracker.model.dto.DadosAutenticacao;
-import com.API.Task_Tracker.model.dto.DadosCadastroUsuario;
 import com.API.Task_Tracker.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
