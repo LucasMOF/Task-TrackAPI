@@ -3,6 +3,8 @@ package com.API.Task_Tracker.infra.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,16 +17,22 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfigurations {
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf ->csrf.disable()) // Desativar o csrf
+                .csrf(csrf -> csrf.disable()) // Desativar o csrf
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Não cria sessções na memória
                 .authorizeHttpRequests(req -> req.requestMatchers(HttpMethod.POST, "/usuarios").permitAll().anyRequest().authenticated()) // Qualquer um pode acessar o /usuarios (caminho para cadastro)
                 .build();
-        }
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
 }
