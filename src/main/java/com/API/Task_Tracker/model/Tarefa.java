@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
+@Entity(name = "Tarefa")
 @Table(name = "tarefas")
 public class Tarefa {
 
@@ -18,7 +20,11 @@ public class Tarefa {
 
     private String titulo;
     private String descricao;
-    private boolean concluida = false;
+
+    @Enumerated(EnumType.STRING)
+    private StatusTarefa status;
+
+    private LocalDateTime dataCriacao;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
