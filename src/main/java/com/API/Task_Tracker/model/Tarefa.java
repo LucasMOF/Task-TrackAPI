@@ -1,5 +1,6 @@
 package com.API.Task_Tracker.model;
 
+import com.API.Task_Tracker.model.dto.DadosAtualizacaoTarefa;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,4 +30,18 @@ public class Tarefa {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    public void atualizarInformacoes(DadosAtualizacaoTarefa dados) {
+        if (dados.titulo() != null) {
+            this.titulo = dados.titulo();
+        }
+
+        if (dados.descricao() != null) {
+            this.descricao = dados.descricao();
+        }
+
+        if (dados.status() != null) {
+            this.status = dados.status();
+        }
+    }
 }
