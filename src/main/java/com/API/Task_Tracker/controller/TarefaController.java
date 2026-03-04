@@ -67,4 +67,19 @@ public class TarefaController {
 
         return ResponseEntity.ok(new DadosDetalhamentoTarefa(tarefa));
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deletarTarefa(@PathVariable Long id) {
+        Usuario usuarioLogado = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        var tarefa = tarefaRepository.getReferenceById(id);
+
+        if (!tarefa.getUsuario().getId().equals(usuarioLogado.getId())) {
+            throw new RuntimeException("Acesso negado");
+        }
+        tarefaRepository.delete(tarefa);
+
+        return ResponseEntity.noContent().build();
+    }
 }
