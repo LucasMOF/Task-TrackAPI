@@ -7,6 +7,7 @@ import com.API.Task_Tracker.model.dto.DadosAtualizacaoTarefa;
 import com.API.Task_Tracker.model.dto.DadosCadastroTarefa;
 import com.API.Task_Tracker.model.dto.DadosDetalhamentoTarefa;
 import com.API.Task_Tracker.repository.TarefaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,7 +25,7 @@ public class TarefaController {
     private TarefaRepository tarefaRepository;
 
     @PostMapping
-    public ResponseEntity cadastrar(@RequestBody DadosCadastroTarefa dados) {
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroTarefa dados) {
         Usuario usuarioLogado = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Tarefa novaTarefa = new Tarefa();
